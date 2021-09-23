@@ -1,60 +1,48 @@
 #include <iostream>
 #include <vector>
 
-std::vector<int> merge_sort1(std::vector<int> A){
-    if (std::size(A) == 1 || std::size(A) == 0){
-        return A;
-    }
-    std::vector<int> L;
-    std::vector<int> R;
+std::vector<int> merge(std::vector<int> L, std::vector<int> R){
     std::vector<int> C;
-    for (int i = 0; i <= std::size(A)/2; i++){
-        L.push_back(A[i]);
-    }
-    for (int i = std::size(A)/2; i <= std::size(A); i++){
-        R.push_back(A[i]);
-    }
-    merge_sort1(L);
-    merge_sort1(R);
-    int m = 0;
-    int n = 0;
-    int k = 0;
-    for (int i = 0; i < std::size(L) +std::size(R); i++){
-        C.push_back(0);
-    }
-    while (n < std::size(L) && m < std::size(R)){
-        if (L[n] <= R[m]){
-            C[k] = L[n];
-            ++n;
+    int j = 0, k = 0;
+    bool a = true, b = true;
+    for (int i = 0; i < L.size() + R.size(); i++){
+        if (((L[j] < R[k]) && a) || !b){
+            C.push_back(L[j]);
+            if (j == L.size() - 1) {a = false;}
+            else{ j ++;}
         }
-        else{
-            C[k] = R[m];
-            ++m;
-            ++k;
+        else if ((L[j] >= R[k] && a) ||  b){
+            C.push_back(R[k]);
+            if (k == R.size() - 1) {b = false;}
+            else{k ++;}
         }
     }
-    while(n < std::size(L)) {
-        C[k] = L[n];
-        ++n;
-        ++k;
-    }
-    while(m < std::size(R)) {
-        C[k] = R[m];
-        ++m;
-        ++k;
-    }
-    for(int i = 0; i < std::size(A); i++){
-        A[i] = C[i];
-    }
-    return A;
+    return C;
 }
 
-int main() {
-    std::vector<int> M;
-    std::vector<int> A = {7, -42, 5, 0,16,-8};
-    M = merge_sort1(A);
-    for(int i = 0; i < M.size(); i++){
-        std::cout << "\n" << M[i] << "\n";
+std::vector<int> merge_sort(std::vector<int>& A){
+    if (A.size() == 1){
+        return A;
     }
-    return 0;
+    else{
+        std::vector<int> L, R;
+        for(int i = 0; i < A.size(); i++){
+            if (i < A.size() / 2){
+                L.push_back(A[i]);
+            }
+            else{
+                R.push_back(A[i]);}
+        }
+        L = merge_sort(L);
+        R = merge_sort(R);
+        return merge(L, R);
+    }
+}
+
+int main(){
+    std::vector<int> A = {7, -42, 5, 0,16,-8};
+    std::vector<int> M = merge_sort(A);
+    for (auto  i : M){
+        std::cout << i << std::endl;
+    }
 }
