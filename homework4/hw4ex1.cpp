@@ -8,7 +8,8 @@ struct Vect{
 };
 
 Vect operator*(Vect a, double lambda){
-    Vect result;
+  std::vector<double> r(a.dim);
+    Vect result{a.dim, r};
     for(int i = 0; i <= a.dim; i++){
         result.components[i] = a.components[i] * lambda;
     }
@@ -16,7 +17,8 @@ Vect operator*(Vect a, double lambda){
 }
 
 Vect operator*(double lambda, Vect a){
-    Vect result;
+    std::vector<double> r(a.dim);
+    Vect result{a.dim, r};
     for(int i = 0; i <= a.dim; i++){
         result.components[i] = a.components[i] * lambda;
     }
@@ -24,7 +26,8 @@ Vect operator*(double lambda, Vect a){
 }
 
 Vect operator+(Vect a, Vect b){
-    Vect result;
+    std::vector<double> r(a.dim);
+    Vect result{a.dim, r};
     for(int i = 0; i <= a.dim; i++){
         result.components[i] = a.components[i] + b.components[i];
     }
@@ -32,7 +35,8 @@ Vect operator+(Vect a, Vect b){
 }
 
 Vect operator-(Vect a, Vect b) {
-    Vect result;
+    std::vector<double> r(a.dim);
+    Vect result{a.dim, r};
     for (int i = 0; i <= a.dim; i++){
         result.components[i] = a.components[i] - b.components[i];
     }
@@ -40,7 +44,8 @@ Vect operator-(Vect a, Vect b) {
 }
 
 Vect operator*(Vect a, Vect b){
-    Vect result;
+    std::vector<double> r(a.dim);
+    Vect result{a.dim, r};
     for(int i = 0; i <= a.dim; i++){
         result.components[i] = a.components[i] * b.components[i];
     }
@@ -48,7 +53,8 @@ Vect operator*(Vect a, Vect b){
 }
 
 Vect operator-(Vect a){
-    Vect result;
+    std::vector<double> r(a.dim);
+    Vect result{a.dim, r};
     for(int i = 0; i <= a.dim; i++){
         result.components[i] = -a.components[i];
     }
@@ -56,7 +62,7 @@ Vect operator-(Vect a){
 }
 
 double module(Vect a){
-    double result;
+    double result = 0;
     for(int i = 0; i <= a.dim; i++){
         result += a.components[i] * a.components[i];
     }
@@ -91,4 +97,8 @@ int main(){
     Vect b{dim, n2}; Vect a{dim, n1};
     auto c = -a;
     std::cout << c.components << std::endl;
-}
+  c = a + b;
+    std::cout << c.components << std::endl;
+  auto d = module(a);
+    std::cout << d << std::endl;
+  }
