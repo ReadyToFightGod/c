@@ -24,6 +24,9 @@ int main( ){
     }
     cout << "++" << f1 << ++f1 << "; "<< f1 << "++" << f1++ << endl;
     cout << "--" << f1 << --f1 << "; "<< f1 << "--" << f1-- << endl;
+    cout << f1 " <= "<< f2 << " : " << f1 <= f2 << endl;
+    cout << f1 " >= "<< f2 << " : " << f1 >= f2 << endl;
+    cout << f1 " == "<< f2 << " : " << f1 == f2 << endl;
     cout << f1 << " in double is " << double(f1) << endl;
     cout << f2 << " in double is " << double(f2) << endl;
 }
