@@ -1,11 +1,12 @@
 #include <iostream>
-int r = 0;
+
 template<typename T, typename... Types>
 int get_amount(T first_argument, Types... arguments) {
-    r += sizeof(first_argument);
-    if constexpr(sizeof...(arguments) > 0) {
-        get_amount(arguments...);
-    } else {return r;}
+    int r = 0;
+    for (int i = 0; i <= sizeof...(arguments) + 2; i++){
+        r += sizeof(first_argument);
+    }
+    return r;
 }
 
 template <typename... Types>
@@ -14,8 +15,9 @@ auto sum(Types... arguments) {
     return result;
 }
 
+
 int main(){
-    int n = get_amount(3, 10, 4.5, 33.5);
-    int m = sum(3, 10, 4.5, 33.5);
-    std::cout << n << ' ' << m;
+    int n = get_amount(3, 10.5, 4u, 33.5, 3);
+//    int m = sum(3, 10, 4.5, 33.5);
+    std::cout << n;
 }
