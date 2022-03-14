@@ -18,7 +18,7 @@ std::vector<std::string> search(const std::regex& pattern,
 }
 
 int main() {
-    std::regex pattern(R"(^\d{1,4}.(0[1-9]|1[0-2]).(0[1-9]|[12][0-9]|3[01])$)");
+    std::regex pattern(R"(\d{1,}[.](0[1-9]|1[0-2])[.](0[1-9]|[12][0-9]|3[01]))");
     //std::regex pattern(R"(\b([01]?[0-9]|2[0-3]):([0-5]\d)\b)"); - для времени
 
     std::string text = "sforgje arig earg +7900000-00-00 dfmpa +734241"
